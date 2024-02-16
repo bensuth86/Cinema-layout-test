@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row", // aligned horizontally
     flexWrap: "wrap",
     alignItems: "baseline",
-    // width: 150,
+    width: 150,
     gap: 10,
     borderWidth: 1,
     borderColor: "red",
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     padding: 4,
 
     width: 30,
-    // height: '16px',
+    height: "25px",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
     // position: 'relative',
