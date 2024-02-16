@@ -1,19 +1,19 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
-seatwidht = 30
+seatwidht = 30;
 export const styles = StyleSheet.create({
   container: {
     // marginTop: 10,
     flex: 1,
-    flexDirection : "column",  // aligned vertically
-    flexWrap: "wrap",  // fit items within container
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    flexDirection: "column", // aligned vertically
+    flexWrap: "wrap", // fit items within container
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start",
     borderWidth: 6,
-    borderColor: "black"
+    borderColor: "black",
   },
-  title: {backgroundColor: "lightblue", width: 150, padding: 10},
+  title: { backgroundColor: "lightblue", width: 150, padding: 10 },
   text: {
     fontSize: 16,
     fontWeight: "bold",
@@ -22,19 +22,18 @@ export const styles = StyleSheet.create({
   },
   rowcontainer: {
     // flex: 1,
-    flexDirection : "row", // aligned horizontally
+    flexDirection: "row", // aligned horizontally
     flexWrap: "wrap",
     alignItems: "baseline",
     // width: 150,
     gap: 10,
     borderWidth: 1,
-    borderColor: "red"    
-  }
-  ,
+    borderColor: "red",
+  },
   seat: {
     // flex: 1,
 
-    backgroundColor: '#626262',
+    backgroundColor: "#626262",
     padding: 4,
 
     width: 30,
@@ -44,17 +43,27 @@ export const styles = StyleSheet.create({
     // position: 'relative',
     // top: '1',
   },
-
+  selectedseat: {
+    backgroundColor: "#626262",
+    padding: 4,
+    width: 30,
+    height: 25,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    padding: 4,
+    width: 30,
+    height: 25,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
   allseats: {
-  flex: 1,
-  flexDirection: 'row',
-  gap: '10',
-}
+    flex: 1,
+    flexDirection: "row",
+    gap: "10",
+  },
 });
 
 // module.exports = {styles}
-
-
 
 // body {
 //   margin: 0;
