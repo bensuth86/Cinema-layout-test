@@ -1,20 +1,64 @@
+import react from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { useState } from 'react';
+import { styles } from './styles-sheet';
+
+letters = new Array( 26 ).fill( 1 ).map( ( _, i ) => String.fromCharCode( 65 + i ) ) // [A, B, ... Z]
+
+rows = 10
+cols = 8
+
+allSeats = []
+for (let i=0; i < rows; i++){
+  row = letters[i]
+  for (let i=0; i < cols; i++){
+    col = i+1
+    allSeats.push(row+col)
+    } 
+  }
+
+console.log(allSeats)
+
+const booking = [{
+movie: "",
+startingBid: 0,
+seatsOccupied: ["A1"],
+seatsSelected: [] 
+}]
 
 export default function App() {
+  
+  const [selectedSeats, setselectedSeats] = useState([])
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+
+      <View style={[styles.title, styles.text]}>
+        <>Cinema Layout!</>
+      </View>
+      <View style={styles.seatscontainer}>
+            {allSeats.map(seat => {
+              return(<Text style={[styles.seat, styles.text]} key={seat} >{seat}</Text>) }
+            )}
+           
+            {/* <Text style={[styles.seat, styles.text]}>{firstrow[0]}</Text>            
+            <Text style = {[styles.seat, styles.text]}>{firstrow[1]}</Text>
+            <Text style={[styles.seat,styles.text]}>{firstrow[2]}</Text>             */}
+      </View>
+
+      {/* <View style={styles.allseats} key='allseats'>
+                {row.map(seat => {
+                return(
+                  <View style={styles.seat} key={seat}>        
+                    <>{seat}</>
+                  </View>
+                )
+              } 
+            )} 
+               
+        </View> */}
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
