@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-seatwidht = 30;
 export const styles = StyleSheet.create({
   container: {
     // marginTop: 10,
@@ -22,13 +21,22 @@ export const styles = StyleSheet.create({
   },
   rowcontainer: {
     // flex: 1,
-    flexDirection: "row", // aligned horizontally
-    flexWrap: "wrap",
+    // flexDirection: "row", // aligned horizontally
+    // flexWrap: "wrap",
     alignItems: "baseline",
-    width: 150,
     gap: 10,
     borderWidth: 1,
     borderColor: "red",
+  },
+  seatscontainer: {
+    // flex: 1,
+    flexDirection: "row", // aligned horizontally
+    flexWrap: "wrap",
+    alignItems: "baseline",
+    width: 120,
+    gap: 10,
+    borderWidth: 2,
+    borderColor: "lightgreen",
   },
   seat: {
     // flex: 1,

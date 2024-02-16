@@ -13,11 +13,13 @@ const cols = 3;
 
 allSeats = [];
 for (let i = 0; i < rows; i++) {
+  currentrow = []
   row = letters[i];
   for (let i = 0; i < cols; i++) {
     col = i + 1;
-    allSeats.push(row + col);
+    currentrow.push(row + col);
   }
+  allSeats.push(currentrow)
 }
 
 console.log(allSeats);
@@ -43,8 +45,27 @@ export default function App() {
       <View style={[styles.title, styles.text]}>
         <>Cinema Layout!</>
       </View>
-      <View style={styles.rowcontainer}>
-        {allSeats.map((seat) => {
+
+      <View style={styles.seatscontainer}>
+        {allSeats.map((row) => {  
+          <View>        
+          return(                        
+            row.map((seat) => {
+              return (
+                
+                <Pressable onPress={handlePress}>
+                  <Text style={[styles.seat, styles.text]} key={seat}>
+                    {seat}
+                  </Text>
+                </Pressable>
+              );
+            })
+          )
+          </View>
+        }
+      )}
+      </View>
+        {/* {row.map((seat) => {
           return (
             <Pressable onPress={handlePress}>
               <Text style={[styles.seat, styles.text]} key={seat}>
@@ -52,24 +73,10 @@ export default function App() {
               </Text>
             </Pressable>
           );
-        })}
+        })} */}
 
-        {/* <Text style={[styles.seat, styles.text]}>{firstrow[0]}</Text>            
-            <Text style = {[styles.seat, styles.text]}>{firstrow[1]}</Text>
-            <Text style={[styles.seat,styles.text]}>{firstrow[2]}</Text>             */}
-      </View>
+      
 
-      {/* <View style={styles.allseats} key='allseats'>
-                {row.map(seat => {
-                return(
-                  <View style={styles.seat} key={seat}>        
-                    <>{seat}</>
-                  </View>
-                )
-              } 
-            )} 
-               
-        </View> */}
       <StatusBar style="auto" />
     </View>
   );
