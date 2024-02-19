@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 
-seatwidht = 30;
 export const styles = StyleSheet.create({
   container: {
     // marginTop: 10,
@@ -20,12 +19,22 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     color: "white",
   },
+  allseatscontainer: {
+    // flex: 1,
+    flexDirection: "row", // aligned horizontally
+    flexWrap: "wrap",
+    alignItems: "center",
+    width: "auto",
+    gap: 10,
+    borderWidth: 1,
+    borderColor: "red",
+  },
   rowcontainer: {
     // flex: 1,
     flexDirection: "row", // aligned horizontally
     flexWrap: "wrap",
-    alignItems: "baseline",
-    width: 150,
+    alignItems: "center",
+    width: "auto",
     gap: 10,
     borderWidth: 1,
     borderColor: "red",
@@ -34,7 +43,7 @@ export const styles = StyleSheet.create({
     // flex: 1,
 
     backgroundColor: "#626262",
-    padding: 4,
+    padding: "auto",
 
     width: 30,
     height: "25px",
@@ -43,23 +52,43 @@ export const styles = StyleSheet.create({
     // position: 'relative',
     // top: '1',
   },
-  selectedseat: {
-    backgroundColor: "#626262",
-    padding: 4,
+  greenseat: {
+    backgroundColor: "#7bc47f",
+    padding: 1,
     width: 30,
-    height: 25,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    padding: 4,
     width: 30,
-    height: 25,
+    height: "25px",
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
-  allseats: {
-    flex: 1,
-    flexDirection: "row",
-    gap: "10",
+  greyseat: {
+    backgroundColor: "#D0D0D0",
+    padding: 1,
+    width: 30,
+    width: 30,
+    height: "25px",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  orangeseat: {
+    backgroundColor: "#FFBF00",
+    padding: 1,
+    width: 30,
+    width: 30,
+    height: "25px",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  redborder: {
+    backgroundColor: "#7bc47f",
+    padding: 1,
+    width: 30,
+    width: 30,
+    height: "25px",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderColor: "red",
+    borderWidth: "3px",
   },
 });
 
