@@ -4,73 +4,131 @@ import { Text, View, Pressable } from "react-native";
 import { useState } from "react";
 import { styles } from "./styles-sheet";
 
-const letters = new Array(26)
-  .fill(1)
-  .map((_, i) => String.fromCharCode(65 + i)); // [A, B, ... Z]
-
-const rows = 3;
-const cols = 3;
-
-allSeats = [];
-for (let i = 0; i < rows; i++) {
-  row = letters[i];
-  for (let i = 0; i < cols; i++) {
-    col = i + 1;
-    allSeats.push(row + col);
-  }
-}
-
-console.log(allSeats);
-
-const booking = [
-  {
-    movie: "",
-    startingBid: 2.0, // starting bid per seat
-    currentBid: null,
-    seatsSelected: ["A1", "A2", "A3"],
-  },
-];
-
 export default function App() {
-  const [selectedSeats, setselectedSeats] = useState([]);
-  const [pressed, setPressed] = useState(false);
-  function handlePress() {
-    setselectedSeats(...selectedSeats, { seat });
-    setPressed(true);
+  const [availableSeats, setAvailableSeats] = useState([]);
+  //in the real one this would patch the available_seats array in the business table
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  //this would patch the seat_selection array in the auction table
+  const [auctionSeats, setAuctionSeats] = useState(["A2", "C3"]);
+  //this would get all the seats in the seat_selection array from the auction tables for that event id. SELECT * FROM auctions WHERE event_id = ____ AND SEAT_SELECTION includes [seat]
+
+  function generateSeatGrid(rows, columns) {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let seatGrid = [];
+
+    for (let i = 0; i < rows; i++) {
+      let row = [];
+      for (let j = 0; j < columns; j++) {
+        let seat = alphabet[i] + (j + 1);
+        row.push(seat);
+      }
+      seatGrid.push(row);
+    }
+
+    return seatGrid;
   }
+
+  const seatGrid = generateSeatGrid(4, 3);
+
   return (
-    <View style={styles.container}>
-      <View style={[styles.title, styles.text]}>
-        <>Cinema Layout!</>
-      </View>
-      <View style={styles.rowcontainer}>
-        {allSeats.map((seat) => {
+    <>
+      <View style={styles.container}>
+        <View style={[styles.title, styles.text]}>
+          {" "}
+          <>Cinema Layout: Business View</>
+        </View>
+        {seatGrid.map((row) => {
           return (
-            <Pressable onPress={handlePress}>
-              <Text style={[styles.seat, styles.text]} key={seat}>
-                {seat}
-              </Text>
-            </Pressable>
+            <>
+              <View style={styles.rowcontainer}>
+                {" "}
+                {row.map((seat) => {
+                  const isAvailable = availableSeats.includes(seat);
+
+                  return (
+                    <>
+                      <Pressable
+                        onPress={() => {
+                          {
+                            isAvailable
+                              ? setAvailableSeats(
+                                  availableSeats.filter((item) => seat !== item)
+                                )
+                              : setAvailableSeats([...availableSeats, seat]);
+                            console.log(availableSeats);
+                          }
+                        }}
+                      >
+                        <Text
+                          style={[
+                            styles.text,
+                            isAvailable ? styles.greenseat : styles.seat,
+                          ]}
+                          key={seat}
+                        >
+                          {seat}
+                        </Text>
+                      </Pressable>
+                    </>
+                  );
+                })}
+              </View>
+            </>
           );
         })}
-
-        {/* <Text style={[styles.seat, styles.text]}>{firstrow[0]}</Text>            
-            <Text style = {[styles.seat, styles.text]}>{firstrow[1]}</Text>
-            <Text style={[styles.seat,styles.text]}>{firstrow[2]}</Text>             */}
+        <StatusBar style="auto" />
       </View>
-
-      {/* <View style={styles.allseats} key='allseats'>
-                {row.map(seat => {
-                return(
-                  <View style={styles.seat} key={seat}>        
-                    <>{seat}</>
-                  </View>
-                )
-              } 
-            )} 
-               
-        </View> */}
-      <StatusBar style="auto" />
-    </View>
+      <View style={styles.container}>
+        <View style={[styles.title, styles.text]}>
+          {" "}
+          <>Cinema Layout: User View</>
+        </View>
+        <View style={styles.rowcontainer}>
+          {seatGrid.map((seat) => {
+            const isAvailable = availableSeats.includes(seat);
+            const isAuctioning = auctionSeats.includes(seat);
+            const isSelected = selectedSeats.includes(seat);
+            return (
+              <>
+                {isAvailable ? (
+                  <Pressable
+                    onPress={() => {
+                      {
+                        setSelectedSeats([...selectedSeats, seat]);
+                      }
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.text,
+                        isSelected ? styles.redborder : styles.greenseat,
+                      ]}
+                      key={seat}
+                    >
+                      £1
+                    </Text>
+                  </Pressable>
+                ) : isAuctioning ? (
+                  <Pressable disabled="true">
+                    {" "}
+                    <Text style={[styles.text, styles.orangeseat]} key={seat}>
+                      £3
+                    </Text>
+                  </Pressable>
+                ) : (
+                  <Pressable disabled="true">
+                    {" "}
+                    <Text style={[styles.text, styles.greyseat]} key={seat}>
+                      {" "}
+                    </Text>
+                  </Pressable>
+                )}
+              </>
+            );
+          })}
+        </View>
+        <StatusBar style="auto" />
+      </View>
+    </>
   );
 }
